@@ -1,0 +1,12 @@
+* {
+
+font-family: 'Bitter', serif;
+
+
+}
+
+article {
+   word-wrap: break-word;
+   width: 50%;
+   font-size: 12pt;
+}
