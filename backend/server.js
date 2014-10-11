@@ -130,7 +130,7 @@ String.prototype.getTextBetweenTokens = function(token1, token2) {
 };
 
 // binds the server to the port and ip
-server.listen(1337, 'localhost');
+server.listen(1337, '0.0.0.0');
 
 // like a printf
 console.log('Server running at http://localhost:1337/');

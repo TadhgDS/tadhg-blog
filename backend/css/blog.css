@@ -1,16 +1,21 @@
 * {
-
-
-font-family: 'Bitter', serif;
-
-
+	font-family: 'Bitter', serif;
 }
 
-.container {
+main {
    padding:20px;
+   width: 600px;
+
    background-color: #E0E0E0;
-   word-wrap: break-word;
-   width: 50%;
-   font-size: 12pt;
+   color: #363636;
 }
 
+article {
+   font-size: 16px;
+   text-rendering: auto;
+}
+
+article header {
+	font-weight: bold;
+	font-size: 18px;
+}
