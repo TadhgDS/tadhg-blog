@@ -1,12 +1,16 @@
 * {
 
+
 font-family: 'Bitter', serif;
 
 
 }
 
-article {
+.container {
+   padding:20px;
+   background-color: #E0E0E0;
    word-wrap: break-word;
    width: 50%;
    font-size: 12pt;
 }
+

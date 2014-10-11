@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{{Title}}</title>
+        <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+        <link href='/blog.css' rel='stylesheet' type='text/css'>
+        <link href='/layout.css' rel='stylesheet' type='text/css'>
+    </head>
+
+    <body>
+    <div class="container">
+        <h1>Blog Posts:</h1>
+
+        <ol>
+            {{REPEAT}}
+            <li>
+                <h2><a href="{{Post1.Link}}">{{Post1.Title}}</a></h2>
+            </li>
+            {{ENDREPEAT}}
+        </ol>
+    </div>
+    </body>
+</html>
