@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>{{Title}}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+        <link href='/normalize.css' rel='stylesheet' type='text/css'>
+        <link href='/blog.css' rel='stylesheet' type='text/css'>
+        <link href='/layout.css' rel='stylesheet' type='text/css'>
+        <style> 
+        	#iframe {
+        		width:400px;
+        		display:inline-block;
+        	}
+        	article {
+        		width:400px;
+        		display:inline-block;
+        	}
+        	main {
+        		margin:auto;
+        	}
+        </style>
+    </head>
+    
+    <body>
+        <nav>
+            <a id="home" href="/">Home</a>
+        </nav>
+    
+        <main>
+        
+            <article>
+                
+                <form>
+			<input name="title" type="text">
+			<br />
+			
+			<textarea name="post" cols="55" rows="50" id="textarea"></textarea> 
+     			<br />
+       			<input type="submit" value="Submit now" />
+			
+			
+		</form>
+                
+            </article>
+                
+            <iframe id="iframe">
+            
+            
+            </iframe>
+            <script type="text/javascript">  
+            
+	    	var textarea = document.getElementById('textarea');       	            
+            	var loadPreview = function(){
+            		var iframe = document.getElementById('iframe');
+            		iframe.src = '/preview/?markdown=' + textarea.value;
+            	};
+            	
+            	textarea.addEventListener('keyup', loadPreview);
+            	
+            </script>
+            
+        </main>
+    </body>
+</html>
