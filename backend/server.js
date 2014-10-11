@@ -5,13 +5,14 @@ var fs = require('fs');
 var url = require('url');
 var markdown = require('markdown').markdown;
 
-var currentDirectory = '/home/artur/blogproject/backend/';
+var currentDirectory = __dirname + '/';
 
 // creates a http server
 var server = http.createServer(function (request, response) {
     // every time a request comes from a browser
     // this code is executed
     
+    console.log(request.method);
     if (request.url === '/')
     {
         var blogPostsFolder = currentDirectory + 'blog-posts/';
@@ -77,7 +78,7 @@ var server = http.createServer(function (request, response) {
     
         // read the html file
         // and spit them into the response
-        fs.readFile('/home/artur/blogproject' + request.url, 'utf8', function (err,data) {
+        fs.readFile(currentDirectory + 'css' + request.url, 'utf8', function (err,data) {
             if (err) {
                 response.writeHead(404, {'Content-Type': 'text/html'});
                 response.end('Ooops ' + request.url + ' couldnt be found!');
