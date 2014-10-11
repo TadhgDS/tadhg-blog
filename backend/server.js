@@ -50,6 +50,40 @@ var server = http.createServer(function (request, response) {
         });
     }
     
+    
+    if (request.url.startsWith('/edit/')) 
+    {
+    	fs.readFile(currentDirectory + 'templates/edit', 'utf8', function(err, template) {
+            if (err) console.log(err);
+               
+      	    response.writeHead(200, {'Content-Type': 'text/html'});
+            response.end(template);
+        });
+    }
+    
+    if (request.url.startsWith('/preview/'))
+    {
+       fs.readFile(currentDirectory + 'templates/entry', 'utf8', function(err, template) {
+            if (err) console.log(err);
+            
+                var post = markdown.toHTML(url.parse(request.url, true).query.markdown);
+                
+                var html = '';
+                
+                // TODO: you have three strings, one called 'template' which is the template with tokens
+                // and the second called 'post' which is the contents of the blog post file
+                // and 'html' which is the string that will be sent back to the browser
+                
+                html = template.replace('{{Contents}}', post);
+                
+               
+                response.writeHead(200, {'Content-Type': 'text/html'});
+                response.end(html);
+            
+        });
+
+    }
+    
     if (request.url.startsWith('/post/'))
     {
         fs.readFile(currentDirectory + 'templates/entry', 'utf8', function(err, template) {
