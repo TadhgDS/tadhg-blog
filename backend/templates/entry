@@ -8,6 +8,11 @@
     </head>
     
     <body>
+    
+    <nav>
+        <a id="home" href="/">Home</a>
+    </nav>
+    
     <div class="container">
         <h1>{{Title}}</h1>
         <h2>{{Author}}</h2>

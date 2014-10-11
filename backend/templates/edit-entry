@@ -12,7 +12,7 @@
             <input type="text">{{Title}}</input>
             <input type="text">{{Author}}</input>
             
-            <article>
+            <input type=text>
                 {{Contents}}
             </article>
         </form>

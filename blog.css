@@ -1,16 +1,29 @@
 * {
+    font-family: 'Bitter', serif;
+}
 
-
-font-family: 'Bitter', serif;
-
-
+nav {
+    margin-left: 2%;
+    margin-top: 3%;
 }
 
 .container {
+   margin-left:10%;
    padding:20px;
+   border-radius: 4px;
    background-color: #E0E0E0;
    word-wrap: break-word;
-   width: 50%;
    font-size: 12pt;
 }
 
+article {
+    text-align: justify;
+    hyphens: auto;
+}
+
+p {
+}
+
+#home {
+    font-size: 10pt;
+}
