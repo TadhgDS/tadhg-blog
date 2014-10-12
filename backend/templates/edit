@@ -7,20 +7,65 @@
         <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
         <link href='/normalize.css' rel='stylesheet' type='text/css'>
         <link href='/blog.css' rel='stylesheet' type='text/css'>
-        <link href='/layout.css' rel='stylesheet' type='text/css'>
         <style> 
-        	#iframe {
-        		width:400px;
+        	#output {
+        		width:700px;
+                height: 800px;
         		display:inline-block;
+                vertical-align: top;
         	}
         	article {
         		width:400px;
         		display:inline-block;
+                vertical-align: top;
         	}
         	main {
         		margin:auto;
         	}
+            #textarea {
+                width: 380px;
+                height: 800px;
+            }
         </style>
+        <script type="text/javascript">
+            var ajaxGet = function(url, callback) {
+                var xmlhttp  = new XMLHttpRequest();
+
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState === 4) {
+                       if(xmlhttp.status === 200){
+                           callback(null, xmlhttp.responseText);
+                       }
+                       else {
+                            callback(xmlhttp, null);
+                       }
+                    }
+                };
+
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+            };
+
+            var postObject = function(url, obj, callback) {
+                var xmlhttp = new XMLHttpRequest();
+
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState === 4) {
+                       if(xmlhttp.status === 200){
+                           callback(null, xmlhttp.responseText);
+                       }
+                       else {
+                            callback(xmlhttp, null);
+                       }
+                    }
+                };
+
+                xmlhttp.open('POST', url, true)
+                xmlhttp.setRequestHeader('Content-type','application/json');
+                xmlhttp.send(JSON.stringify(obj));
+            };
+            </script>
+        </script>
     </head>
     
     <body>
@@ -31,36 +76,28 @@
         <main>
         
             <article>
-                
                 <form>
-			<input name="title" type="text">
-			<br />
-			
-			<textarea name="post" cols="55" rows="50" id="textarea"></textarea> 
-     			<br />
-       			<input type="submit" value="Submit now" />
-			
-			
-		</form>
-                
+                    <input name="title" type="text"/>
+                    <textarea name="post" id="textarea"></textarea>
+                    <input type="submit" value="Submit now" />
+                </form>
             </article>
                 
-            <iframe id="iframe">
-            
-            
-            </iframe>
-            <script type="text/javascript">  
-            
-	    	var textarea = document.getElementById('textarea');       	            
-            	var loadPreview = function(){
-            		var iframe = document.getElementById('iframe');
-            		iframe.src = '/preview/?markdown=' + textarea.value;
-            	};
+            <div id="output"></div>
+
+            <script type="text/javascript">
+            	var textarea = document.getElementById('textarea');
+                var parserUrl = '/preview/';
             	
-            	textarea.addEventListener('keyup', loadPreview);
-            	
+            	textarea.addEventListener('keyup', function() {
+                    postObject(parserUrl, textarea.value, function(err, response) {
+                        if (err) alert(JSON.stringify(err));
+
+                        var output = document.getElementById('output');
+                        output.innerHTML = JSON.parse(response);
+                    });
+                });
             </script>
-            
         </main>
     </body>
 </html>

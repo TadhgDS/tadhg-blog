@@ -63,25 +63,19 @@ var server = http.createServer(function (request, response) {
     
     if (request.url.startsWith('/preview/'))
     {
-       fs.readFile(currentDirectory + 'templates/entry', 'utf8', function(err, template) {
-            if (err) console.log(err);
-            
-                var post = markdown.toHTML(url.parse(request.url, true).query.markdown);
-                
-                var html = '';
-                
-                // TODO: you have three strings, one called 'template' which is the template with tokens
-                // and the second called 'post' which is the contents of the blog post file
-                // and 'html' which is the string that will be sent back to the browser
-                
-                html = template.replace('{{Contents}}', post);
-                
-               
-                response.writeHead(200, {'Content-Type': 'text/html'});
-                response.end(html);
-            
+        var jsonString = '';
+        request.on('data', function (data) {
+            jsonString += data;
         });
 
+        request.on('end', function () {
+            console.log(jsonString);
+            var html = markdown.toHTML(JSON.parse(jsonString));
+            console.log(html);
+            console.log(JSON.stringify(html));
+            response.writeHead(200, {'Content-Type': 'application/json'});
+            response.end(JSON.stringify(html));
+        });
     }
     
     if (request.url.startsWith('/post/'))
