@@ -60,6 +60,16 @@ var server = http.createServer(function (request, response) {
             response.end(template);
         });
     }
+
+    if (request.url.startsWith('/submit'))
+    {
+
+        // MyVariableOne=ValueOne&MyVariableTwo=ValueTwo
+        // title=A new blog post&post=blah blah blah
+
+            response.writeHead(503, {'Content-Type': 'text/html'});
+            response.end('<html><body>Not implemented yet</body></html>');
+    }
     
     if (request.url.startsWith('/preview/'))
     {
