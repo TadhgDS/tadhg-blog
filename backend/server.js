@@ -80,6 +80,8 @@ var server = http.createServer(function (request, response) {
 
         request.on('end', function () {
             var theObject = JSON.parse(jsonString);
+            console.log(theObject.title);
+            console.log(theObject.main);
             theObject.title = markdown.toHTML(theObject.title);
             theObject.main = markdown.toHTML(theObject.main); 
             
