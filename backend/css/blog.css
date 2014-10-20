@@ -1,20 +1,32 @@
 * {
 	font-family: 'Bitter', serif;
+	
 }
 
 main {
    padding:20px;
 
-   background-color: #E0E0E0;
+
+   /*background-color: #E0E0E0; */
+   background-color: #FFFFF0;
    color: #363636;
+}
+
+body {
+
+   /* background-color: #FFEEE3;*/
+   background-color: #FF9900;
+
 }
 
 article {
    font-size: 16px;
+   color: #3D2B1F;
    text-rendering: optimizeLegibility;
 }
 
 article header {
 	font-weight: bold;
 	font-size: 20px;
+	color: #3D2B1F;
 }
