@@ -79,12 +79,12 @@ var server = http.createServer(function (request, response) {
         });
 
         request.on('end', function () {
-            console.log(jsonString);
-            var html = markdown.toHTML(JSON.parse(jsonString));
-            console.log(html);
-            console.log(JSON.stringify(html));
+            var theObject = JSON.parse(jsonString);
+            theObject.title = markdown.toHTML(theObject.title);
+            theObject.main = markdown.toHTML(theObject.main); 
+            
             response.writeHead(200, {'Content-Type': 'application/json'});
-            response.end(JSON.stringify(html));
+            response.end(JSON.stringify(theObject));
         });
     }
     

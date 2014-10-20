@@ -59,8 +59,8 @@
         
             <article>
                 <form method="POST" action="/submit">
-                    <input name="title" type="text"/>
-                    <textarea name="post" id="textarea"></textarea>
+                    <input id="title" type="text"/>
+                    <textarea id="textarea"></textarea>
                     <input type="submit" value="Submit now" />
                 </form>
             </article>
@@ -68,15 +68,29 @@
             <div id="output"></div>
 
             <script type="text/javascript">
-            	var textarea = document.getElementById('textarea');
+            	var titletext = document.getElementById('title');
+                var textarea = document.getElementById('textarea');
+
                 var parserUrl = '/preview/';
             	
+                var postContentObject = {title:titletext.value,
+                                         main:textarea.value};
+
+
+                console.log(titletext.value);
+                console.log(textarea.value);
+
+                console.log('sss');
+
             	textarea.addEventListener('keyup', function() {
-                    postObject(parserUrl, textarea.value, function(err, response) {
+                    postObject(parserUrl, postContentObject, function(err, response) {
                         if (err) alert(JSON.stringify(err));
 
                         var output = document.getElementById('output');
-                        output.innerHTML = JSON.parse(response);
+                        output.innerHTML = ''+ JSON.parse(response).titletext + JSON.parse(response).textarea;
+
+
+
                     });
                 });
             </script>
