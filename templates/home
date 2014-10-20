@@ -7,8 +7,15 @@
         <link href='/layout.css' rel='stylesheet' type='text/css'>
     </head>
 
-    <main>
+    
         <body>
+
+        <nav>
+            <a id="home" href="/">Home</a>
+            <a id="About" href="/">About</a>
+        </nav>
+
+        <main>
         <div class="container">
             <h1>Blog Posts:</h1>
 
