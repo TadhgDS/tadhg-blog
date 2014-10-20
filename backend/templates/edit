@@ -72,25 +72,16 @@
                 var textarea = document.getElementById('textarea');
 
                 var parserUrl = '/preview/';
-            	
-                var postContentObject = {title:titletext.value,
-                                         main:textarea.value};
-
-
-                console.log(titletext.value);
-                console.log(textarea.value);
-
-                console.log('sss');
 
             	textarea.addEventListener('keyup', function() {
+
+                    var postContentObject = {title:titletext.value, main:textarea.value};
+
                     postObject(parserUrl, postContentObject, function(err, response) {
                         if (err) alert(JSON.stringify(err));
 
                         var output = document.getElementById('output');
-                        output.innerHTML = ''+ JSON.parse(response).titletext + JSON.parse(response).textarea;
-
-
-
+                        output.innerHTML = JSON.parse(response).main;
                     });
                 });
             </script>
