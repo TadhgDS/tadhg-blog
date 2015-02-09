@@ -5,7 +5,7 @@
 
 header {
     background-color:black;
-    height:40px;
+    height:20px;
     color:#FFFFE0;
     text-align:center;
 }
@@ -37,7 +37,6 @@ article header {
 
 pageheading {
    font-size: 400%;
-   height:80%;
 }
 
 nav {
@@ -53,10 +52,11 @@ nav {
     position:fixed;   
     left:10px;
     right:0px;
+	top:20px;
 }
 section {
 	width:90%; 
-	height:80%;
+
     background-color:#FFF5F0;		
 	left:11%;
 
@@ -76,5 +76,6 @@ footer {
     color:#FFFFE0;
     clear:both;
     text-align:center;
-	height:20px; 	 
+	height:20px;
+  /* padding:5px;	*/ 	 
 }

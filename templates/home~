@@ -15,33 +15,35 @@
 > 
 
 	<header> </header>
-    <body>
 
-		<nav>
+
+        <body>
+
+	<nav>
             <a id="home" href="/">Home</a>
 		<br>
             <a id="About" href="/">About</a>
         </nav>
+        
+	
+	<section>
+		<sectionpadding></sectionpadding>		
+
+		<!<div class="container">
+
+		    <pageheading>Blog Posts:</pageheading>
+
+		    <ol>
+		        {{REPEAT}}
+		        <li>
+		            <h2><a href="{{Post1.Link}}">{{Post1.Title}}</a></h2>
+		        </li>
+		        {{ENDREPEAT}}
+		    </ol>
+		<! </div> 
+	</section>
+
+	<footer></footer>
+        </body>
     
-		
-		<section>
-			<sectionpadding></sectionpadding>		
-
-			<!<div class="container">
-
-			    <pageheading>Blog Posts:</pageheading>
-
-			    <ol>
-			        {{REPEAT}}
-			        <li>
-			            <h2><a href="{{Post1.Link}}">{{Post1.Title}}</a></h2>
-			        </li>
-			        {{ENDREPEAT}}
-			    </ol>
-			<! </div> 
-		</section>
-
-
-		<footer></footer>
-
 </html>
