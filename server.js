@@ -89,42 +89,51 @@ var server = http.createServer(function (request, response) {
         // MyVariableOne=ValueOne&MyVariableTwo=ValueTwo
         // title=A new blog post&post=blah blah blah
 
+        /*
             response.writeHead(503, {'Content-Type': 'text/html'});
             response.end('<html><body>Not implemented yet</body></html>');
+        */
 
 
-/*
-            var qs = require('querystring');
-
-            function (request, response) {
-                if (request.method == 'POST') {
-                    var body = '';
-                    request.on('data', function (data) {
-                        body += data;
-
-                        // Too much POST data, kill the connection!
-                        if (body.length > 1e6)
-                            request.connection.destroy();
-                    });
-                    request.on('end', function () {
-                        var post = qs.parse(body);
-
-                        console.log(post);
-                    });
-                }
-            }
-*/
+        if (request.method == 'POST') {
+            console.log("[200] " + request.method + " to " + request.url);
+          
 
 
-            var postContents = 'wtf';
+            console.log('---------------');
+            console.log('---------------');
+            
+            request.on('data', function(chunk) {
+                console.log("Received body data:");
+                console.log(chunk.toString());
+        });
 
-           fs.writeFile("/tmp/test", "Hey there!", function(err) {
+            console.log('---------------');
+            console.log('---------------');
+        
+        request.on('end', function() {
+          // empty 200 OK response for now
+            response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+            response.end();
+        });
+        
+    } else {
+        console.log("[405] " + request.method + " to " + request.url);
+        response.writeHead(405, "Method not supported", {'Content-Type': 'text/html'});
+        response.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
+    }
+
+
+
+        var postContents = 'wtf';
+
+        fs.writeFile("/tmp/test", "Hey there!", function(err) {
             if(err) {
                 console.log(err);
             } else {
                 console.log("The file was saved!");
             }
-            });
+        });
 
     }
     
