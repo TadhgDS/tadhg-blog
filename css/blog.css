@@ -1,80 +1,47 @@
 * {
-	font-family: 'Bitter', serif;
-	
+    font-family: 'Bitter', serif;
+    
 }
-
+body {
+    background-color: #FFFFE0;
+}
 header {
     background-color:black;
-    height:40px;
-    color:#FFFFE0;
+    color:white;
     text-align:center;
+    padding:5px;
 }
-
-body {
-	background-color:#FFFFE0;
-	height:100%
-         
-    position:fixed;
-    top:20px;
-    bottom:20px;
-    left:10%;
-    right:0px;
-
-}
-
-article {
-   font-size: 16px;
-   color: #3D2B1F;
-   text-rendering: optimizeLegibility;
-}
-
-article header {
-	font-weight: bold;
-	font-size: 20px;
-	color: #3D2B1F;
-}
-
-
-pageheading {
-   font-size: 400%;
-   height:80%;
-}
-
 nav {
     line-height:30px;
-    background-color:#FFFFE0;
-    height:80%;
-    width:8%;
-    float:left;	      
-	
-
-
-
-    position:fixed;   
-    left:10px;
-    right:0px;
+    background-color:#B76FB7;
+    height:40px;
+    padding:5px; 
 }
 section {
-	width:90%; 
-	height:80%;
-    background-color:#FFF5F0;		
-	left:11%;
-
-
-    position:fixed;   
- 
-    right:0px;
-}
-
-sectionpadding {
-	padding:10px;
-	background-color:black;
-	height:80%;
+    
+    padding-left: 40px;
+    padding-right: 40px; 
+    background-color: #FFFFE0;
+    height: 650px;
 }
 footer {
     background-color:black;
-    color:#FFFFE0;
+    color:white;
     clear:both;
     text-align:center;
-	height:20px; 	 
+    padding:5px; 
 }
+article {
+    padding-left: 40px;
+    padding-right: 480px; 
+
+}
+div{
+    padding-left: 40px;
+    padding-right: 300px;
+}
+
+
+
+
+

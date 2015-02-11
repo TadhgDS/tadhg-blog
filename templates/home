@@ -1,47 +1,44 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
         <title>{{Title}}</title>
+
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+        <link href='/normalize.css' rel='stylesheet' type='text/css'>
         <link href='/blog.css' rel='stylesheet' type='text/css'>
-        <link href='/layout.css' rel='stylesheet' type='text/css'>
+
     </head>
-
-<! 
-	header
-	nav
-	section
-	footer
-> 
-
-	<header> </header>
+	
     <body>
-
+    	<header> </header>
 		<nav>
             <a id="home" href="/">Home</a>
-		<br>
             <a id="About" href="/">About</a>
         </nav>
     
-		
+
 		<section>
-			<sectionpadding></sectionpadding>		
 
 			<!<div class="container">
 
-			    <pageheading>Blog Posts:</pageheading>
+			    <h1>Blog Posts:</h1>
 
-			    <ol>
-			        {{REPEAT}}
-			        <li>
-			            <h2><a href="{{Post1.Link}}">{{Post1.Title}}</a></h2>
-			        </li>
-			        {{ENDREPEAT}}
-			    </ol>
+			    <p>
+				    <ol>
+				        {{REPEAT}}
+				        <li>
+				            <h2><a href="{{Post1.Link}}">{{Post1.Title}}</a></h2>
+				        </li>
+				        {{ENDREPEAT}}
+				    </ol>
+				</p>
 			<! </div> 
 		</section>
 
 
 		<footer></footer>
-
+	</body>
 </html>

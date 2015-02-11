@@ -7,22 +7,24 @@
         <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
         <link href='/normalize.css' rel='stylesheet' type='text/css'>
         <link href='/blog.css' rel='stylesheet' type='text/css'>
-        <link href='/layout.css' rel='stylesheet' type='text/css'>
     </head>
     
     <body>
+        <header></header>
+
         <nav>
             <a id="home" href="/">Home</a>
             <a id="About" href="/">About</a>
         </nav>
     
-        <main>
-            <article>
-                <header>{{Title}}</header>
-                
-                {{Contents}}
-            </article>
-                
+
+        <article>
+            <h1>{{Title}}</h1>
+            
+            {{Contents}}
+        </article>
+            
+        <div>    
             <div id="disqus_thread"></div>
             <script type="text/javascript">
                 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -35,6 +37,8 @@
                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                 })();
             </script>
-        </main>
+        </div>
+
+        <footer></footer>
     </body>
 </html>

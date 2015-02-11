@@ -12,6 +12,15 @@ var server = http.createServer(function (request, response) {
     // every time a request comes from a browser
     // this code is executed
     
+
+
+
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+
+
     console.log(request.method);
     if (request.url === '/')
     {
@@ -51,6 +60,13 @@ var server = http.createServer(function (request, response) {
     }
     
     
+
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+
+
     if (request.url.startsWith('/edit/')) 
     {
     	fs.readFile(currentDirectory + 'templates/edit', 'utf8', function(err, template) {
@@ -61,6 +77,12 @@ var server = http.createServer(function (request, response) {
         });
     }
 
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+
+
     if (request.url.startsWith('/submit'))
     {
 
@@ -69,8 +91,51 @@ var server = http.createServer(function (request, response) {
 
             response.writeHead(503, {'Content-Type': 'text/html'});
             response.end('<html><body>Not implemented yet</body></html>');
+
+
+/*
+            var qs = require('querystring');
+
+            function (request, response) {
+                if (request.method == 'POST') {
+                    var body = '';
+                    request.on('data', function (data) {
+                        body += data;
+
+                        // Too much POST data, kill the connection!
+                        if (body.length > 1e6)
+                            request.connection.destroy();
+                    });
+                    request.on('end', function () {
+                        var post = qs.parse(body);
+
+                        console.log(post);
+                    });
+                }
+            }
+*/
+
+
+            var postContents = 'wtf';
+
+           fs.writeFile("/tmp/test", "Hey there!", function(err) {
+            if(err) {
+                console.log(err);
+            } else {
+                console.log("The file was saved!");
+            }
+            });
+
     }
     
+
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+
+
+
     if (request.url.startsWith('/preview/'))
     {
         var jsonString = '';
@@ -90,6 +155,14 @@ var server = http.createServer(function (request, response) {
         });
     }
     
+
+
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+
+
     if (request.url.startsWith('/post/'))
     {
         fs.readFile(currentDirectory + 'templates/entry', 'utf8', function(err, template) {
@@ -134,6 +207,14 @@ var server = http.createServer(function (request, response) {
         });
     }
 });
+
+
+
+
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+    //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
 
 
 
