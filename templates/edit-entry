@@ -14,7 +14,7 @@
             
             <input type=text>
                 {{Contents}}
-            </article>
+            </input>
         </form>
     </body>
 </html>

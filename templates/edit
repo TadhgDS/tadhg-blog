@@ -61,7 +61,7 @@
                 <form method="POST" action="/submit">
                     <input id="title" type="text"/>
                     <textarea id="textarea"></textarea>
-                    <input type="submit" value="Submit now" />
+                    <input type="submit" id="submitButton" value="Submit now" />
                 </form>
             </article>
                 
@@ -84,7 +84,9 @@
                         output.innerHTML = JSON.parse(response).main;
                     });
                 });
+
             </script>
+
         </main>
     </body>
 </html>

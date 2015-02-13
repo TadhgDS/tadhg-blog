@@ -2,10 +2,12 @@
 // brings in some library code
 var http = require('http');
 var fs = require('fs');
+var qs = require('querystring');
 var url = require('url');
 var markdown = require('markdown').markdown;
-
 var currentDirectory = __dirname + '/';
+
+
 
 // creates a http server
 var server = http.createServer(function (request, response) {
@@ -87,41 +89,25 @@ var server = http.createServer(function (request, response) {
     {
 
         // MyVariableOne=ValueOne&MyVariableTwo=ValueTwo
-        // title=A new blog post&post=blah blah blah
-
-        /*
-            response.writeHead(503, {'Content-Type': 'text/html'});
-            response.end('<html><body>Not implemented yet</body></html>');
-        */
-
+        console.log(request.querystring);
 
         if (request.method == 'POST') {
             console.log("[200] " + request.method + " to " + request.url);
           
-
-
-            console.log('---------------');
-            console.log('---------------');
             
-            request.on('data', function(chunk) {
-                console.log("Received body data:");
-                console.log(chunk.toString());
-        });
 
-            console.log('---------------');
-            console.log('---------------');
-        
-        request.on('end', function() {
-          // empty 200 OK response for now
-            response.writeHead(200, "OK", {'Content-Type': 'text/html'});
-            response.end();
-        });
-        
-    } else {
-        console.log("[405] " + request.method + " to " + request.url);
-        response.writeHead(405, "Method not supported", {'Content-Type': 'text/html'});
-        response.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
-    }
+
+
+
+
+
+
+
+        } else {
+            console.log("[405] " + request.method + " to " + request.url);
+            response.writeHead(405, "Method not supported", {'Content-Type': 'text/html'});
+            response.end('<html><head><title>405 - Method not supported</title></head><body><h1>Method not supported.</h1></body></html>');
+        }
 
 
 
@@ -258,6 +244,28 @@ String.prototype.getTextBetweenTokens = function(token1, token2) {
     
     return this.substring(startTokenPos, endTokenPos);
 };
+
+var postObject = function(url, obj, callback) {
+                var xmlhttp = new XMLHttpRequest();
+
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState === 4) {
+                       if(xmlhttp.status === 200){
+                           callback(null, xmlhttp.responseText);
+                       }
+                       else {
+                            callback(xmlhttp, null);
+                       }
+                    }
+                };
+
+                xmlhttp.open('POST', url, true)
+                xmlhttp.setRequestHeader('Content-type','application/json');
+                xmlhttp.send(JSON.stringify(obj));
+            };
+
+
+
 
 // binds the server to the port and ip
 server.listen(1337, '0.0.0.0');
