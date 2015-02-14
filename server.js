@@ -4,6 +4,8 @@ var http = require('http');
 var fs = require('fs');
 var qs = require('querystring');
 var url = require('url');
+var express = require('express');
+var app = express();
 var markdown = require('markdown').markdown;
 var currentDirectory = __dirname + '/';
 
@@ -15,6 +17,11 @@ var server = http.createServer(function (request, response) {
     // this code is executed
     
 
+
+    // accept POST request on the homepage
+    app.post('/', function (req, res) {
+        res.send('Got a POST request');
+    })
 
 
     //=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
@@ -94,15 +101,7 @@ var server = http.createServer(function (request, response) {
         if (request.method == 'POST') {
             console.log("[200] " + request.method + " to " + request.url);
           
-            
-
-
-
-
-
-
-
-
+         
         } else {
             console.log("[405] " + request.method + " to " + request.url);
             response.writeHead(405, "Method not supported", {'Content-Type': 'text/html'});
@@ -138,7 +137,7 @@ var server = http.createServer(function (request, response) {
             jsonString += data;
         });
 
-        request.on('end', function () {
+        request.on('end', function (){
             var theObject = JSON.parse(jsonString);
             console.log(theObject.title);
             console.log(theObject.main);

@@ -27,6 +27,8 @@
                 height: 800px;
             }
         </style>
+
+        
         <script type="text/javascript">
             var postObject = function(url, obj, callback) {
                 var xmlhttp = new XMLHttpRequest();
@@ -50,6 +52,25 @@
         </script>
     </head>
     
+
+<!--
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    <script>
+      $(document).ready(function(){
+        $("#submit").click(function(){
+          var title=$("#title").val();
+          var textarea=$("#textarea").val();
+          $.post("http://localhost:3000/submit",{title: title,textarea: textarea}, function(data){
+            if(data==='done')
+              {
+                alert("login success");
+              }
+          });
+        });
+      });
+    </script>
+-->
+    
     <body>
         <nav>
             <a id="home" href="/">Home</a>
@@ -58,14 +79,19 @@
         <main>
         
             <article>
-                <form method="POST" action="/submit">
-                    <input id="title" type="text"/>
-                    <textarea id="textarea"></textarea>
+                <fieldset>
+                    <form action="/submit" method="POST">
+                    <input type="text" id="title" name="title"/>
+                    <textarea type="text" id="textarea" name="textarea"></textarea>
                     <input type="submit" id="submitButton" value="Submit now" />
                 </form>
+                </fieldset>
+
             </article>
+
                 
             <div id="output"></div>
+
 
             <script type="text/javascript">
             	var titletext = document.getElementById('title');
@@ -75,17 +101,18 @@
 
             	textarea.addEventListener('keyup', function() {
 
-                    var postContentObject = {title:titletext.value, main:textarea.value};
+                    var postContentObject = {title:titletext.value, textarea:textarea.value};
 
                     postObject(parserUrl, postContentObject, function(err, response) {
                         if (err) alert(JSON.stringify(err));
 
                         var output = document.getElementById('output');
-                        output.innerHTML = JSON.parse(response).main;
+                        output.innerHTML = JSON.parse(response).textarea;
                     });
                 });
 
             </script>
+
 
         </main>
     </body>
