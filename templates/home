@@ -1,6 +1,17 @@
 <!doctype html>
 <html lang="en">
     <head>
+
+    	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    	<script src="http://d3js.org/d3.v3.min.js"></script>
+
+	    <script> 
+		    $(function(){
+		      $("#includedContent").load("index.html"); 
+		    });
+	    </script> 
+
+
         <title>{{Title}}</title>
 
 
@@ -21,23 +32,22 @@
     
 
 		<section>
+		    <h1>Blog Posts:</h1>
 
-			<!<div class="container">
+			
+		    <p>
+			    <ol>
+			        {{REPEAT}}
+			        <li>
+			            <h2><a href="{{Post1.Link}}">{{Post1.Title}}</a></h2>
+			        </li>
+			        {{ENDREPEAT}}
 
-			    <h1>Blog Posts:</h1>
-
-			    <p>
-				    <ol>
-				        {{REPEAT}}
-				        <li>
-				            <h2><a href="{{Post1.Link}}">{{Post1.Title}}</a></h2>
-				        </li>
-				        {{ENDREPEAT}}
-				    </ol>
-				</p>
-			<! </div> 
+			        <div id="includedContent"></div>
+			    </ol>
+			</p>
+			
 		</section>
-
 
 		<footer></footer>
 	</body>

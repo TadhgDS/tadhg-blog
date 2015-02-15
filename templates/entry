@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>{{Title}}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
@@ -42,3 +41,5 @@
         <footer></footer>
     </body>
 </html>
+
+

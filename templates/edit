@@ -52,25 +52,6 @@
         </script>
     </head>
     
-
-<!--
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
-    <script>
-      $(document).ready(function(){
-        $("#submit").click(function(){
-          var title=$("#title").val();
-          var textarea=$("#textarea").val();
-          $.post("http://localhost:3000/submit",{title: title,textarea: textarea}, function(data){
-            if(data==='done')
-              {
-                alert("login success");
-              }
-          });
-        });
-      });
-    </script>
--->
-    
     <body>
         <nav>
             <a id="home" href="/">Home</a>

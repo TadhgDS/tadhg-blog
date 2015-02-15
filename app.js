@@ -1,5 +1,14 @@
-	// kinda like a #include <http.h>
-// brings in some library code
+
+/*	TO-DO LIST
+
+	1. Change posts to be represented as JSON allowing for multiple fields eg. {title:x, post:y, timestamp:z, graphs:w, somethingelse:u}
+	2. Add session management for submission page
+	3. d3 example graphs	
+
+
+*/
+
+
 var http = require('http');
 var fs = require('fs');
 var qs = require('querystring');
@@ -61,25 +70,53 @@ app.get('/normalize.css',function(req,res){
         res.writeHead(200, {'Content-Type': 'text/' + type});
         res.end(data);
     });
+
+app.get('/index.html',function(req,res){
+	// read the html file
+    // and spit them into the response
+    fs.readFile(currentDirectory + 'index.html', 'utf8', function (err,data) {
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/html'});
+            res.end('Ooops ' + 'index.html' + ' couldnt be found!');
+            return console.log(err);
+        }
+        
+        var type =  getFileExtension('index.html');
+        console.log(type);
+        
+        res.writeHead(200, {'Content-Type': 'text/' + type});
+        res.end(data);
+    });
+});
+
 });
 
 app.get('/post*',function(req,res)	{
     fs.readFile(currentDirectory + 'templates/entry', 'utf8', function(err, template) {
         if (err) console.log(err);
         var blogFileName = currentDirectory + 'blog-posts/' + getFileName(req.url);
-        fs.readFile(blogFileName, 'utf8', function(err, postMarkUp) {
-            var post = markdown.toHTML(postMarkUp);
+        fs.readFile(blogFileName, 'utf8', function(err, postMarkUp) {            
+            var jsonString = JSON.parse(postMarkUp);
+            var post = markdown.toHTML(jsonString.mainText);
+            var htmltest = '';
             
-            var html = '';
+ 
+
             
             // TODO: you have three strings, one called 'template' which is the template with tokens
             // and the second called 'post' which is the contents of the blog post file
             // and 'html' which is the string that will be sent back to the browser
             
-            html = template.replace('{{Contents}}', post);
+            htmltest = template.replace('{{Contents}}', post);
             var title = getFileName(req.url);
             title = title.replace(/-/g," ");
-            html = html.replace('{{Title}}', title);
+           
+            var html = '';
+            html = htmltest.replace('{{Title}}', title);
+           
+            console.log(html);
+            console.log(html);
+            console.log(html);
             
            
             res.writeHead(200, {'Content-Type': 'text/html'});
@@ -110,9 +147,20 @@ app.post('/submit*',function(req,res){
 	  	var title = req.body.title;
 	  	title = title.replace(/ /g,"-");
 	  	var textarea = req.body.textarea;
+
+
+	  	//json obj
+	  	var postObj = {
+	  		title: req.body.title,
+	  		mainText: req.body.textarea,
+	  		submitDate: Date.now(),
+	  		editDate: "",
+	  		graphs: ""
+	  	}
+	  	var jsonObj = JSON.stringify(postObj);
 	  
-	  	var filepath = currentDirectory + 'blog-posts/' + title;
-	  	fs.writeFile(filepath, textarea, function(err) {
+	  	var filepath = 	currentDirectory + 'blog-posts/' + title;
+	  	fs.writeFile(filepath, jsonObj, function(err) {
             if(err) {
                 console.log(err);
             } else {
