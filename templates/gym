@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style> /* set the CSS */
+
+body { font: 12px Arial;}
+
+path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+</style>
+
+
+<html lang="en">
+    <head>
+
+    	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    	<script src="http://d3js.org/d3.v3.min.js"></script>
+
+	    <script> 
+		    $(function(){
+		      $("#includedContent").load("index.html"); 
+		    });
+	    </script> 
+
+
+        <title>{{Title}}</title>
+
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+        <link href='/normalize.css' rel='stylesheet' type='text/css'>
+        <link href='/blog.css' rel='stylesheet' type='text/css'>
+
+    </head>
+	
+    <body>
+    	<header> </header>
+		<nav>
+            <a id="home" href="/">Home</a>
+            <a id="About" href="/">About</a>
+        </nav>
+    
+
+		<section>			
+	    
+	    	<div id="squat">
+		    {{SQUAT}}
+		    </div>
+		    <br>
+		    
+		    <div id="bench">
+		    {{BENCH}}
+		    </div>
+		    <br>
+
+		    <div id="dead">
+		    {{DEADLIFT}}
+		    </div>
+		    <br>
+		    
+		    <div id="bbrow">
+		    {{BARBELLROW}}
+		    </div>
+		    <br>
+
+		    <div id="ohpress">
+		    {{OVERHEADPRESS}}
+		    </div>
+			
+
+			
+				<svg width="200" height="200">
+				  <circle cx="20" cy="20" r="20" fill="green" />
+				  <circle cx="100" cy="100" r="20" fill="purple" />
+				</svg>
+			
+		</section>
+
+		<footer></footer>
+	</body>
+</html>

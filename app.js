@@ -1,4 +1,3 @@
-
 /*	TO-DO LIST
 
 	1. Change posts to be represented as JSON allowing for multiple fields eg. {title:x, post:y, timestamp:z, graphs:w, somethingelse:u}
@@ -70,6 +69,7 @@ app.get('/normalize.css',function(req,res){
         res.writeHead(200, {'Content-Type': 'text/' + type});
         res.end(data);
     });
+});
 
 app.get('/index.html',function(req,res){
 	// read the html file
@@ -89,7 +89,44 @@ app.get('/index.html',function(req,res){
     });
 });
 
+
+app.get('/data.csv',function(req,res){
+	// read the html file
+    // and spit them into the response
+    fs.readFile(currentDirectory + '/templates/data.csv', 'utf8', function (err,data) {
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/html'});
+            res.end('Ooops ' + 'data.csv' + ' couldnt be found!');
+            return console.log(err);
+        }
+        
+        var type =  getFileExtension('templates/data.csv');
+        console.log(type);
+        
+        res.writeHead(200, {'Content-Type': 'text/csv' + type});
+        res.end(data);
+    });
 });
+
+app.get('/bench.csv',function(req,res){
+	// read the html file
+    // and spit them into the response
+    fs.readFile(currentDirectory + '/templates/bench.csv', 'utf8', function (err,data) {
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/html'});
+            res.end('Ooops ' + 'bench.csv' + ' couldnt be found!');
+            return console.log(err);
+        }
+        
+        var type =  getFileExtension('templates/bench.csv');
+        console.log(type);
+        
+        res.writeHead(200, {'Content-Type': 'text/csv' + type});
+        res.end(data);
+    });
+});
+
+
 
 app.get('/post*',function(req,res)	{
     fs.readFile(currentDirectory + 'templates/entry', 'utf8', function(err, template) {
@@ -113,11 +150,6 @@ app.get('/post*',function(req,res)	{
            
             var html = '';
             html = htmltest.replace('{{Title}}', title);
-           
-            console.log(html);
-            console.log(html);
-            console.log(html);
-            
            
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.end(html);
@@ -191,8 +223,43 @@ app.post('/preview/',function(req,res){
 
 });
 
+app.get('/gym',function(req,res){
+	fs.readFile(currentDirectory + 'templates/gym', 'utf8', function(err, gymTemplate) {
+		if (err) console.log(err);
+		fs.readFile(currentDirectory + 'templates/linechart', 'utf8', function(err, graphTemplate) {
+	        if (err) console.log(err);
+	       // graphtemplate = graphtemplate.replace('')
+	           
+
+	        var html = '';
+	        var temp = '';
+	        temp = gymTemplate.replace('{{OVERHEADPRESS}}', graphTemplate);
+	        html = temp.replace('d3.select("body")','d3.select("#ohpress")');
+	        var atemp ='';
+	        var ahtml ='';
+	        atemp = html.replace('{{BENCH}}', graphTemplate);   
+	        ahtml = atemp.replace('d3.select("body")','d3.select("#bench")');
 
 
+	        var aatemp ='';
+	        var aahtml ='';
+	        aatemp = ahtml.replace('{{DEADLIFT}}', graphTemplate);   
+	        aahtml = aatemp.replace('d3.select("body")','d3.select("#dead")');
+
+	        var test = aahtml.replace('data.csv', 'bench.csv');  
+	        
+	  	    res.writeHead(200, {'Content-Type': 'text/html'});
+	        res.end(test);
+	    });
+    });
+});
+
+
+/*============================
+
+			HOME 	
+
+==============================*/
 
 app.get('/', function (req, res){
 

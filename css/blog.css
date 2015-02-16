@@ -1,3 +1,5 @@
+/*
+
 * {
     font-family: 'Bitter', serif;
     
@@ -28,9 +30,6 @@ footer {
     background-color:black;
     color:white;
     clear:both;
-    position:absolute;
-    /*bottom:0;*/
-    margin-bottom: 0px;
     padding:5px; 
 }
 article {
