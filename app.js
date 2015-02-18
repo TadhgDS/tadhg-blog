@@ -90,17 +90,92 @@ app.get('/index.html',function(req,res){
 });
 
 
-app.get('/data.csv',function(req,res){
+//==============================================================
+//==============================================================
+//==============================================================
+
+
+
+app.get('/squat.csv',function(req,res){
 	// read the html file
     // and spit them into the response
-    fs.readFile(currentDirectory + '/templates/data.csv', 'utf8', function (err,data) {
+    fs.readFile(currentDirectory + 'datafiles/squat.csv', 'utf8', function (err,data) {
         if (err) {
             res.writeHead(404, {'Content-Type': 'text/html'});
-            res.end('Ooops ' + 'data.csv' + ' couldnt be found!');
+            res.end('Ooops ' + 'squat.csv' + ' couldnt be found!');
             return console.log(err);
         }
         
-        var type =  getFileExtension('templates/data.csv');
+        var type =  getFileExtension('datafiles/squat.csv');
+        console.log(type);
+        
+        res.writeHead(200, {'Content-Type': 'text/csv' + type});
+        res.end(data);
+    });
+});
+app.get('/bench.csv',function(req,res){
+	// read the html file
+    // and spit them into the response
+    fs.readFile(currentDirectory + 'datafiles/bench.csv', 'utf8', function (err,data) {
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/html'});
+            res.end('Ooops ' + 'bench.csv' + ' couldnt be found!');
+            return console.log(err);
+        }
+        
+        var type =  getFileExtension('datafiles/bench.csv');
+        console.log(type);
+        
+        res.writeHead(200, {'Content-Type': 'text/csv' + type});
+        res.end(data);
+    });
+});
+app.get('/dead.csv',function(req,res){
+	// read the html file
+    // and spit them into the response
+    console.log('HEREEEEEEEEEEEE============   '+ currentDirectory);
+    fs.readFile(currentDirectory + 'datafiles/dead.csv', 'utf8', function (err,data) {
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/html'});
+            res.end('Ooops ' + 'dead.csv' + ' couldnt be found!');
+            return console.log(err);
+        }
+        
+        var type =  getFileExtension('datafiles/dead.csv');
+        console.log(type);
+        
+        res.writeHead(200, {'Content-Type': 'text/csv' + type});
+        res.end(data);
+    });
+});
+app.get('/bbrow.csv',function(req,res){
+	// read the html file
+    // and spit them into the response
+    fs.readFile(currentDirectory + 'datafiles/bbrow.csv', 'utf8', function (err,data) {
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/html'});
+            res.end('Ooops ' + 'bbrow.csv' + ' couldnt be found!');
+            return console.log(err);
+        }
+        
+        var type =  getFileExtension('datafiles/bbrow.csv');
+        console.log(type);
+        
+        res.writeHead(200, {'Content-Type': 'text/csv' + type});
+        res.end(data);
+    });
+});
+app.get('/ohpress.csv',function(req,res){
+	// read the html file
+    // and spit them into the response
+    fs.readFile(currentDirectory + 'datafiles/ohpress.csv', 'utf8', function (err,data) {
+        if (err) {
+            res.writeHead(404, {'Content-Type': 'text/html'});
+            res.end('Ooops ' + 'ohpress.csv' + ' couldnt be found!');
+            return console.log(err);
+        }
+        
+        var type =  getFileExtension('datafiles/ohpress.csv');
         console.log(type);
         
         res.writeHead(200, {'Content-Type': 'text/csv' + type});
@@ -108,23 +183,14 @@ app.get('/data.csv',function(req,res){
     });
 });
 
-app.get('/bench.csv',function(req,res){
-	// read the html file
-    // and spit them into the response
-    fs.readFile(currentDirectory + '/templates/bench.csv', 'utf8', function (err,data) {
-        if (err) {
-            res.writeHead(404, {'Content-Type': 'text/html'});
-            res.end('Ooops ' + 'bench.csv' + ' couldnt be found!');
-            return console.log(err);
-        }
-        
-        var type =  getFileExtension('templates/bench.csv');
-        console.log(type);
-        
-        res.writeHead(200, {'Content-Type': 'text/csv' + type});
-        res.end(data);
-    });
-});
+
+
+
+//==============================================================
+//==============================================================
+//==============================================================
+
+
 
 
 
@@ -228,28 +294,37 @@ app.get('/gym',function(req,res){
 		if (err) console.log(err);
 		fs.readFile(currentDirectory + 'templates/linechart', 'utf8', function(err, graphTemplate) {
 	        if (err) console.log(err);
-	       // graphtemplate = graphtemplate.replace('')
-	           
 
-	        var html = '';
-	        var temp = '';
-	        temp = gymTemplate.replace('{{OVERHEADPRESS}}', graphTemplate);
-	        html = temp.replace('d3.select("body")','d3.select("#ohpress")');
-	        var atemp ='';
-	        var ahtml ='';
-	        atemp = html.replace('{{BENCH}}', graphTemplate);   
-	        ahtml = atemp.replace('d3.select("body")','d3.select("#bench")');
+			var squat = graphTemplate.replace('data.csv', 'squat.csv');  
+			//squat = squat.replace('d3.select("body")','d3.select("squat")');
+			var bench = graphTemplate.replace('data.csv', 'bench.csv');  
+			//bench = bench.replace('d3.select("body")','d3.select("bench")');
+			var dead = graphTemplate.replace('data.csv', 'dead.csv');  
+			var bbrow = graphTemplate.replace('data.csv', 'bbrow.csv');  
+			var ohpress = graphTemplate.replace('data.csv', 'ohpress.csv');  
+
+			gymTemplate = gymTemplate.replace('{{SQUAT}}', squat);
+			gymTemplate = gymTemplate.replace('{{BENCH}}', bench);
+			gymTemplate = gymTemplate.replace('{{DEADLIFT}}', dead);
+			gymTemplate = gymTemplate.replace('{{BARBELLROW}}', bbrow);
+			gymTemplate = gymTemplate.replace('{{OVERHEADPRESS}}', ohpress);
+
+			console.log(gymTemplate);
 
 
-	        var aatemp ='';
-	        var aahtml ='';
-	        aatemp = ahtml.replace('{{DEADLIFT}}', graphTemplate);   
-	        aahtml = aatemp.replace('d3.select("body")','d3.select("#dead")');
 
-	        var test = aahtml.replace('data.csv', 'bench.csv');  
-	        
+
+			fs.writeFile("/tmp/test", gymTemplate, function(err) {
+			    if(err) {
+			        console.log(err);
+			    } else {
+			        console.log("The file was saved!");
+			    }
+			}); 
+
+
 	  	    res.writeHead(200, {'Content-Type': 'text/html'});
-	        res.end(test);
+	        res.end(gymTemplate);
 	    });
     });
 });
