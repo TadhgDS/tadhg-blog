@@ -1,10 +1,5 @@
 /*	TO-DO LIST
 
-	1. Change posts to be represented as JSON allowing for multiple fields eg. {title:x, post:y, timestamp:z, graphs:w, somethingelse:u}
-	2. Add session management for submission page
-	3. d3 example graphs	
-
-
 */
 
 
@@ -45,8 +40,7 @@ app.get('/blog.css',function(req,res){
         
         console.log('css/blog.css');
         var type =  getFileExtension('css/blog.css');
-        console.log(type);
-        
+       
         res.writeHead(200, {'Content-Type': 'text/' + type});
         res.end(data);
     });
@@ -64,7 +58,6 @@ app.get('/normalize.css',function(req,res){
         
         console.log('css/blog.css');
         var type =  getFileExtension('css/blog.css');
-        console.log(type);
         
         res.writeHead(200, {'Content-Type': 'text/' + type});
         res.end(data);
@@ -82,8 +75,6 @@ app.get('/index.html',function(req,res){
         }
         
         var type =  getFileExtension('index.html');
-        console.log(type);
-        
         res.writeHead(200, {'Content-Type': 'text/' + type});
         res.end(data);
     });
@@ -107,7 +98,6 @@ app.get('/squat.csv',function(req,res){
         }
         
         var type =  getFileExtension('datafiles/squat.csv');
-        console.log(type);
         
         res.writeHead(200, {'Content-Type': 'text/csv' + type});
         res.end(data);
@@ -124,16 +114,12 @@ app.get('/bench.csv',function(req,res){
         }
         
         var type =  getFileExtension('datafiles/bench.csv');
-        console.log(type);
         
         res.writeHead(200, {'Content-Type': 'text/csv' + type});
         res.end(data);
     });
 });
 app.get('/dead.csv',function(req,res){
-	// read the html file
-    // and spit them into the response
-    console.log('HEREEEEEEEEEEEE============   '+ currentDirectory);
     fs.readFile(currentDirectory + 'datafiles/dead.csv', 'utf8', function (err,data) {
         if (err) {
             res.writeHead(404, {'Content-Type': 'text/html'});
@@ -142,7 +128,6 @@ app.get('/dead.csv',function(req,res){
         }
         
         var type =  getFileExtension('datafiles/dead.csv');
-        console.log(type);
         
         res.writeHead(200, {'Content-Type': 'text/csv' + type});
         res.end(data);
@@ -159,7 +144,6 @@ app.get('/bbrow.csv',function(req,res){
         }
         
         var type =  getFileExtension('datafiles/bbrow.csv');
-        console.log(type);
         
         res.writeHead(200, {'Content-Type': 'text/csv' + type});
         res.end(data);
@@ -176,7 +160,6 @@ app.get('/ohpress.csv',function(req,res){
         }
         
         var type =  getFileExtension('datafiles/ohpress.csv');
-        console.log(type);
         
         res.writeHead(200, {'Content-Type': 'text/csv' + type});
         res.end(data);
@@ -295,32 +278,29 @@ app.get('/gym',function(req,res){
 		fs.readFile(currentDirectory + 'templates/linechart', 'utf8', function(err, graphTemplate) {
 	        if (err) console.log(err);
 
-			var squat = graphTemplate.replace('data.csv', 'squat.csv');  
+			var str = graphTemplate.replace('data.csv', 'squat.csv');  
+			//squat = squat.replace('data.csv', 'squat.csv');  
+			var find = 'data.csv';
+			var re = new RegExp(find, 'g');
+
+			squat = str.replace(re, 'squat.csv');
+
 			//squat = squat.replace('d3.select("body")','d3.select("squat")');
-			var bench = graphTemplate.replace('data.csv', 'bench.csv');  
+			var bench = graphTemplate.replace('/data.csv/g', 'bench.csv');  
+			bench = bench.replace(re,'bench.csv');
 			//bench = bench.replace('d3.select("body")','d3.select("bench")');
-			var dead = graphTemplate.replace('data.csv', 'dead.csv');  
-			var bbrow = graphTemplate.replace('data.csv', 'bbrow.csv');  
-			var ohpress = graphTemplate.replace('data.csv', 'ohpress.csv');  
+			var dead = graphTemplate.replace('/data.csv/g', 'dead.csv');  
+			dead = dead.replace(re,'dead.csv');
+			var bbrow = graphTemplate.replace('/data.csv/g', 'bbrow.csv');  
+			bbrow = bbrow.replace(re,'bbrow.csv');
+			var ohpress = graphTemplate.replace('/data.csv/g', 'ohpress.csv');  
+			ohpress = ohpress.replace(re,'ohpress.csv');
 
 			gymTemplate = gymTemplate.replace('{{SQUAT}}', squat);
 			gymTemplate = gymTemplate.replace('{{BENCH}}', bench);
 			gymTemplate = gymTemplate.replace('{{DEADLIFT}}', dead);
 			gymTemplate = gymTemplate.replace('{{BARBELLROW}}', bbrow);
 			gymTemplate = gymTemplate.replace('{{OVERHEADPRESS}}', ohpress);
-
-			console.log(gymTemplate);
-
-
-
-
-			fs.writeFile("/tmp/test", gymTemplate, function(err) {
-			    if(err) {
-			        console.log(err);
-			    } else {
-			        console.log("The file was saved!");
-			    }
-			}); 
 
 
 	  	    res.writeHead(200, {'Content-Type': 'text/html'});
@@ -329,6 +309,23 @@ app.get('/gym',function(req,res){
     });
 });
 
+
+app.get('/gym/squat',function(req,res){
+
+	var title = getFileName(req.url);
+	var namedotcsv = title + '.csv';
+
+	var chart;
+	fs.readFile(currentDirectory + 'templates/linechart', 'utf8', function(err, graphTemplate) {
+	    if (err) console.log(err);
+
+		chart = graphTemplate.replace('data.csv', namedotcsv);  
+	});
+
+	res.writeHead(200, {'Content-Type': 'text/html'});
+    res.end(chart);
+            
+});
 
 /*============================
 
@@ -430,20 +427,20 @@ String.prototype.getTextBetweenTokens = function(token1, token2) {
 };
 
 var postObject = function(url, obj, callback) {
-                var xmlhttp = new XMLHttpRequest();
+	var xmlhttp = new XMLHttpRequest();
 
-                xmlhttp.onreadystatechange = function() {
-                    if (xmlhttp.readyState === 4) {
-                       if(xmlhttp.status === 200){
-                           callback(null, xmlhttp.responseText);
-                       }
-                       else {
-                            callback(xmlhttp, null);
-                       }
-                    }
-                };
+	xmlhttp.onreadystatechange = function() {
+	    if (xmlhttp.readyState === 4) {
+	       if(xmlhttp.status === 200){
+	           callback(null, xmlhttp.responseText);
+	       }
+	       else {
+	            callback(xmlhttp, null);
+	       }
+	    }
+	};
 
-                xmlhttp.open('POST', url, true)
-                xmlhttp.setRequestHeader('Content-type','application/json');
-                xmlhttp.send(JSON.stringify(obj));
-            };
+	xmlhttp.open('POST', url, true)
+	xmlhttp.setRequestHeader('Content-type','application/json');
+	xmlhttp.send(JSON.stringify(obj));
+};
