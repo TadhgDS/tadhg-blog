@@ -38,13 +38,12 @@ var valueline = d3.svg.line()
 // Adds the svg canvas
 var svg = d3.select("body")
     .append("svg")
+        .attr("class", "data.csv".replace(".csv", ""))
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
     .append("g")
         .attr("transform", 
               "translate(" + margin.left + "," + margin.top + ")");
-    
-
 
 // Get the data
 d3.csv("data.csv", function(error, data) {
@@ -64,27 +63,21 @@ d3.csv("data.csv", function(error, data) {
 
     // Add the X Axis
     svg.append("g")
-        .attr("class", "x axis")
+        .attr("class", "xaxis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
     // Add the Y Axis
     svg.append("g")
-        .attr("class", "y axis")
+        .attr("class", "yaxis")
         .call(yAxis);
-
-
- setInterval(function() {
-        // data is not derined!!!
-        updateData();
-    }, 3000);
-
-
-
 });
 
 
-
+setInterval(function() {
+    // data is not derined!!!
+    updateData();
+}, 2000);
 
 // ** Update data section (Called from the onclick)
 function updateData() {
@@ -97,29 +90,40 @@ function updateData() {
         });
 
         // Scale the range of the data again 
+
         x.domain(d3.extent(data, function(d) { return d.date; }));
-        y.domain([0, d3.max(data, function(d) { return d.close; })]);
+        y.domain(d3.extent(data, function(d) { return d.close; }));
+
+        // Define the axes
+        var xAxis = d3.svg.axis().scale(x)
+            .orient("bottom").ticks(5);
+
+        var yAxis = d3.svg.axis().scale(y)
+            .orient("left").ticks(5);
 
     // Select the section we want to apply our changes to
-        var svg = d3.select("body");
+        var svg = d3.select("svg." + "data.csv".replace(".csv", ""));
 
     // Make the changes
         svg.select(".line")   // change the line
-            .duration(750)
+            .attr("transform", "translate(0,0)")
             .attr("d", valueline(data))
-            .transition();
+            .transition()
+            .duration(750)
+            .attr("transform", "translate(" + x(new Date(data[data.length - 1].date + 1)) + ",0)");
 
-
+/*
         var svg = d3.select("body")
             .append("path").attr("class", "line")
                 .attr("d", valueline(data));
-      /*  svg.select(".x.axis") // change the x axis
-            .duration(750)
+                */
+        svg.select(".xaxis") // change the x axis
+            
             .call(xAxis);
-        svg.select(".y.axis") // change the y axis
-            .duration(750)
+        svg.select(".yaxis") // change the y axis
+            
             .call(yAxis);
-*/
+
 
         
     
