@@ -1,12 +1,18 @@
-/*
+@font-face {
+  font-family: "PT Serif";
+  font-style: normal;
+  font-weight: 400;
+  src: local("PT Serif"), local("PTSerif-Regular"), url("http://fonts.gstatic.com/s/ptserif/v8/I-OtoJZa3TeyH6D9oli3ifesZW2xOQ-xsNqO47m55DA.woff2") format("woff2"), url("http://fonts.gstatic.com/s/ptserif/v8/sDRi4fY9bOiJUbgq53yZCfesZW2xOQ-xsNqO47m55DA.woff") format("woff");
+}
 
 * {
-    font-family: 'Bitter', serif;
+    font-family: 'PT Serif', serif;
     
 }
 body {
     background-color: #FFFFE0;
 }
+
 header {
     background-color:black;
     color:white;
@@ -41,9 +47,3 @@ div{
     padding-left: 40px;
     padding-right: 300px;
 }
-
-
-
-
-
-*/
