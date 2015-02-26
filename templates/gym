@@ -1,47 +1,12 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<!-- <meta http-equiv="refresh" content="5" />  ANNNOYING-->
-<style> /* set the CSS */
-
-body { font: 12px Arial;}
-
-path { 
-    stroke: steelblue;
-    stroke-width: 2;
-    fill: none;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: grey;
-    stroke-width: 1;
-    shape-rendering: crispEdges;
-}
-
-</style>
 
 
 <html lang="en">
     <head>
 
     	<script src="http://d3js.org/d3.v3.min.js"></script>
-    
-    	
-    	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
-
-
-
-
-		
-
-
-	    <script> 
-
-
-		
-	    </script> 
-	    
+       	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
 
         <title>{{Title}}</title>
 
@@ -52,16 +17,55 @@ path {
         <link href='/normalize.css' rel='stylesheet' type='text/css'>
         <link href='/blog.css' rel='stylesheet' type='text/css'>
 
+		<style> /* set the CSS */
+
+		body {
+			padding-left: 100px;
+  			padding-right: 40px;
+		}
+
+		div {
+			font-size: 12px;
+			font: Arial;
+		}
+
+		nav {
+		    line-height:30px;
+		   /* background-color:#B76FB7;*/
+		    height:20px; 
+		}
+
+		path { 
+		    stroke: steelblue;
+		    stroke-width: 2;
+		    fill: none;
+		}
+
+		.axis path,
+		.axis line {
+		    fill: none;
+		    stroke: grey;
+		    stroke-width: 1;
+		    shape-rendering: crispEdges;
+		}
+
+		</style>
+
+
+
+
     </head>
 	
     <body>
     	<header> </header>
 		<nav>
-            <a id="home" href="/">Home</a>
-            <a id="About" href="/">About</a>
-        </nav>
+            <a id="home" href="/">Home</a> |
+            <a id="About" href="/">About</a> |
+            <a id="About" href="/">Tech-Book Reviews</a> |
+            <a id="About" href="/">Lit Reviews</a> |
+            <a id="About" href="/">Contact</a> 
+        </nav>    
     
-    	<section>
 			<div id="chart-container">
 			<g>
 		    	<div id="squat">
@@ -90,7 +94,6 @@ path {
 			</g>    
 			</div>
 			
-		</section>
 
 		<footer></footer>
 	</body>

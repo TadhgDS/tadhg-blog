@@ -15,9 +15,12 @@
     <body>
     	<header> </header>
 		<nav>
-            <a id="home" href="/">Home</a>
-            <a id="About" href="/">About</a>
-        </nav>
+            <a id="home" href="/">Home</a> |
+            <a id="About" href="/">About</a> |
+            <a id="About" href="/">Tech-Book Reviews</a> |
+            <a id="About" href="/">Lit Reviews</a> |
+            <a id="About" href="/">Contact</a> 
+        </nav>    
     
 
 		<section>

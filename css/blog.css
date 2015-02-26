@@ -4,46 +4,60 @@
   font-weight: 400;
   src: local("PT Serif"), local("PTSerif-Regular"), url("http://fonts.gstatic.com/s/ptserif/v8/I-OtoJZa3TeyH6D9oli3ifesZW2xOQ-xsNqO47m55DA.woff2") format("woff2"), url("http://fonts.gstatic.com/s/ptserif/v8/sDRi4fY9bOiJUbgq53yZCfesZW2xOQ-xsNqO47m55DA.woff") format("woff");
 }
+@import url(http://fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i|PT+Sans|PT+Sans:b);
+
+
 
 * {
     font-family: 'PT Serif', serif;
-    
+    text-decoration:none;
 }
+#postdate {
+	text-align: right;
+}
+
 body {
     background-color: #FFFFE0;
+    padding-left: 100px;
+    padding-right: 480px;
 }
 
 header {
-    background-color:black;
+   /* background-color:black;*/
     color:white;
     text-align:center;
     padding:5px;
+    font-family: "PT Sans", sans-serif;
 }
 nav {
     line-height:30px;
-    background-color:#B76FB7;
-    height:40px;
-    padding:5px; 
+   /* background-color:#B76FB7;*/
+    height:20px; 
 }
 section {
-    
-    padding-left: 40px;
-    padding-right: 40px; 
+    /*padding-left: 40px;
+    padding-right: 40px; */
     background-color: #FFFFE0;
     height: 650px;
 }
 footer {
-    background-color:black;
+   
     color:white;
     clear:both;
     padding:5px; 
 }
 article {
-    padding-left: 40px;
-    padding-right: 480px; 
+	font-size: small;
+   /* padding-left: 40px;
+    padding-right: 480px; */
 
 }
+
+h1{
+	font-size:64px;
+    line-height:8px;
+}
 div{
-    padding-left: 40px;
-    padding-right: 300px;
+   /* padding-left: 40px;
+    padding-right: 300px;*/
 }

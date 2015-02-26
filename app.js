@@ -184,21 +184,16 @@ app.get('/post*',function(req,res)	{
         fs.readFile(blogFileName, 'utf8', function(err, postMarkUp) {            
             var jsonString = JSON.parse(postMarkUp);
             var post = markdown.toHTML(jsonString.mainText);
-            var htmltest = '';
-            
- 
+    
 
-            
-            // TODO: you have three strings, one called 'template' which is the template with tokens
-            // and the second called 'post' which is the contents of the blog post file
-            // and 'html' which is the string that will be sent back to the browser
-            
-            htmltest = template.replace('{{Contents}}', post);
-            var title = getFileName(req.url);
-            title = title.replace(/-/g," ");
-           
             var html = '';
-            html = htmltest.replace('{{Title}}', title);
+    
+            html = template.replace('{{Contents}}', post);
+            html = html.replace('{{Title}}', jsonString.title);
+            
+
+            html = html.replace('{{Date}}', getDateString(jsonString.submitDate));
+            
            
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.end(html);
@@ -444,3 +439,13 @@ var postObject = function(url, obj, callback) {
 	xmlhttp.setRequestHeader('Content-type','application/json');
 	xmlhttp.send(JSON.stringify(obj));
 };
+
+
+
+function getDateString(UNIX_timestamp){
+    var dateObj = new Date(UNIX_timestamp);
+    date = dateObj.toUTCString();
+    var n = date.indexOf(dateObj.getFullYear());
+    var date = date.substring(0,n+4);
+    return date;
+}
