@@ -185,6 +185,28 @@ app.get('/post*',function(req,res)	{
             var jsonString = JSON.parse(postMarkUp);
             var post = markdown.toHTML(jsonString.mainText);
     
+            var sidenoteWithTags;
+            if(post.indexOf("{{1}}") > -1){
+                sidenoteWithTags = "<aside>" + jsonString.sn1 + "</aside>"; 
+                post = post.replace("{{1}}",sidenoteWithTags);
+            }
+            if(post.indexOf("{{2}}") > -1){
+
+                sidenoteWithTags = "<aside>" + jsonString.sn2 + "</aside>";
+                post = post.replace("{{2}}",sidenoteWithTags);
+            }
+            if(post.indexOf("{{3}}") > -1){        
+                sidenoteWithTags = "<aside>" + jsonString.sn3 + "</aside>";
+                post = post.replace("{{3}}",sidenoteWithTags);
+            }
+            if(post.indexOf("{{4}}") > -1){                
+                sidenoteWithTags = "<aside>" + jsonString.sn4 + "</aside>";
+                post = post.replace("{{4}}",sidenoteWithTags);
+            }
+            if(post.indexOf("{{5}}") > -1){
+                sidenoteWithTags = "<aside>" + jsonString.sn5 + "</aside>";
+                post = post.replace("{{5}}",sidenoteWithTags);
+            }
 
             var html = '';
     
@@ -213,8 +235,6 @@ app.get('/edit',function(req,res){
 
 
 app.post('/submit*',function(req,res){
-    // MyVariableOne=ValueOne&MyVariableTwo=ValueTwo
-
     
     if (req.method == 'POST') {
         console.log("[200] " + req.method + " to " + req.url);
@@ -224,14 +244,18 @@ app.post('/submit*',function(req,res){
 	  	title = title.replace(/ /g,"-");
 	  	var textarea = req.body.textarea;
 
-
 	  	//json obj
 	  	var postObj = {
 	  		title: req.body.title,
 	  		mainText: req.body.textarea,
 	  		submitDate: Date.now(),
 	  		editDate: "",
-	  		graphs: ""
+	  		graphs: "",
+            sn1: req.body.sn1,
+            sn2: req.body.sn2,
+            sn3: req.body.sn3,
+            sn4: req.body.sn4,
+            sn5: req.body.sn5
 	  	}
 	  	var jsonObj = JSON.stringify(postObj);
 	  

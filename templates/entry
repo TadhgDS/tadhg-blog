@@ -21,8 +21,13 @@
             <article>
                 <h5 id="postdate">{{Date}}</h5>
                 <h1 id="title">{{Title}}</h1>
+
                 <main id="mainContent">
+
+
                     {{Contents}}
+
+
                 </main>
             </article>
                 

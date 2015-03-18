@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='/normalize.css' rel='stylesheet' type='text/css'>
-        <link href='/blog.css' rel='stylesheet' type='text/css'>
+     <!--   <link href='/blog.css' rel='stylesheet' type='text/css'> -->
         <style> 
         	#output {
         		width:700px;
@@ -63,6 +63,16 @@
                     <form action="/submit" method="POST">
                     <input type="text" id="title" name="title"/>
                     <textarea type="text" id="textarea" name="textarea"></textarea>
+                    <input type="text" id="sn1" name="sn1" value="sn1"/>
+                    <br>                    
+                    <input type="text" id="sn2" name="sn2" value="sn2"/>
+                    <br>
+                    <input type="text" id="sn3" name="sn3" value="sn3"/>
+                    <br>                    
+                    <input type="text" id="sn4" name="sn4" value="sn4"/>
+                    <br>                    
+                    <input type="text" id="sn5" name="sn5" value="sn5"/>
+                    <br>                                                    
                     <input type="submit" id="submitButton" value="Submit now" />
                 </form>
                 </fieldset>
@@ -76,6 +86,13 @@
             <script type="text/javascript">
             	var titletext = document.getElementById('title');
                 var textarea = document.getElementById('textarea');
+                var sidenote1 = document.getElementById('sn1');
+                var sidenote2 = document.getElementById('sn2');
+                var sidenote3 = document.getElementById('sn3');
+                var sidenote4 = document.getElementById('sn4');
+                var sidenote5 = document.getElementById('sn5');
+
+
 
                 var parserUrl = '/preview/';
 
