@@ -38,7 +38,6 @@ app.get('/blog.css',function(req,res){
             return console.log(err);
         }
         
-        console.log('css/blog.css');
         var type =  getFileExtension('css/blog.css');
        
         res.writeHead(200, {'Content-Type': 'text/' + type});
@@ -56,7 +55,6 @@ app.get('/normalize.css',function(req,res){
             return console.log(err);
         }
         
-        console.log('css/blog.css');
         var type =  getFileExtension('css/blog.css');
         
         res.writeHead(200, {'Content-Type': 'text/' + type});
@@ -191,7 +189,6 @@ app.get('/post*',function(req,res)	{
                 post = post.replace("{{1}}",sidenoteWithTags);
             }
             if(post.indexOf("{{2}}") > -1){
-
                 sidenoteWithTags = "<aside>" + jsonString.sn2 + "</aside>";
                 post = post.replace("{{2}}",sidenoteWithTags);
             }
@@ -228,6 +225,15 @@ app.get('/edit',function(req,res){
         if (err) console.log(err);
            
   	    res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end(template);
+    });
+});
+
+app.get('/admin',function(req,res){
+    fs.readFile(currentDirectory + 'templates/admin', 'utf8', function(err, template) {
+        if (err) console.log(err);
+           
+        res.writeHead(200, {'Content-Type': 'text/html'});
         res.end(template);
     });
 });
