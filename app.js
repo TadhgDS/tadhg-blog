@@ -242,6 +242,7 @@ app.get('/admin',function(req,res){
 
 app.post('/submit*',function(req,res){
     
+    res.redirect('http://localhost:3000');
     if (req.method == 'POST') {
         console.log("[200] " + req.method + " to " + req.url);
 
@@ -273,6 +274,7 @@ app.post('/submit*',function(req,res){
                 console.log("The file was saved!");
             }
         });
+
 
     } else {
         console.log("[405] " + req.method + " to " + req.url);
